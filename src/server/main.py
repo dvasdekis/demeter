@@ -6,6 +6,7 @@ import logging
 import sys
 import time
 import random
+import multiprocessing
 
 
 def this_func_blocks(n, print_log=False):
@@ -55,12 +56,15 @@ def main():
     logging.basicConfig(level=logging.INFO, format='PID %(process)5s %(name)18s: %(message)s', stream=sys.stderr)
     
     # Determine CPU core count
-    import multiprocessing
+    
     cpu_count = multiprocessing.cpu_count()
     log = logging.getLogger('main')
     log.info(f'CPUcount={cpu_count}')
     # Use available cores to determine the number of simultaneous workers to run
     thread_count = cpu_count * 2
+
+    # Connect to Redis
+
 
     # Create a process pool limited by max workers (thread count) using a context manager
     with concurrent.futures.ProcessPoolExecutor(max_workers=thread_count) as executor:
