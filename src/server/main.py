@@ -5,7 +5,6 @@ import concurrent.futures
 import logging
 import sys
 import time
-import os
 import random
 
 
