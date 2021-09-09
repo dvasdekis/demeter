@@ -11,8 +11,13 @@ This needs:
 Server-side:
 * GUI to point at a directory (start with cmdline)
 - Inputs: Folder path
-- Outputs: Scan task to 
-* Scan & Encrypter to predict how many files/Usenet sets, and give us keys
+- Action: Generate RNG string to encrypt archive with
+- Outputs: Compress task from mp.manager queue
+* Compress & Encrypt with RNG string to give us symmetric key
+- Inputs: Compress task from mp.manager queue (Folder path, RNG string as password)
+- Actions: Invoke 7z to encrypt, compress and split
+- Outputs: Compress task to mp.manager queue
+* Upload with nyuu
 * Delta lake to write sets/keys sets to queue
 * Delta lake compressed with 7zip
 * Delta lake encrypted with age
