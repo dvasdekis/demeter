@@ -10,8 +10,8 @@ This needs:
 
 Server-side:
 * GUI to point at a directory (start with cmdline)
-..- Inputs: Folder path
-..- Action: Generate RNG string to encrypt archive with
+    - Inputs: Folder path
+    - Action: Generate RNG string to encrypt archive with
 - Outputs: Compress task from mp.manager queue
 * Compress & Encrypt with RNG string to give us symmetric key
 - Inputs: Compress task from mp.manager queue (Folder path, RNG string as password)
