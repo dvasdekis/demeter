@@ -1,10 +1,11 @@
-# learning_age
+# DeMeter
 
-Learning Async with aiopg and encryption with age
+Unlimited secure data storage with changes streamed via Dat and Usenet
 
 Let's collect some thoughts:
 
 Use case: Point at a directory and get a link, who can decrypt with their private key, or the one packaged with the program
+As the directory changes, the target directory changes too.
 
 Big problem: I've got all this stuff sitting on the drive. As 7zip creates encrypted xz files, I need to As XZ
 
@@ -12,7 +13,7 @@ This needs:
 
 ## Server-side:
 * GUI to point at a directory (start with cmdline path)
-    - Inputs: Folder path
+    - Inputs: source='/home/user/files'
     - Action: Generate RNG string to encrypt archive with
     - Outputs: Compress function [compress_folder(data_path, output_archive, archive_pw)]
 * Compress & Encrypt with RNG string to give us symmetric key [compress_folder(data_path, output_archive, archive_pw)]
@@ -41,7 +42,15 @@ This needs:
 * Update Delta lake on Dat repo
 * Report secret string for NZB creation
 
+
+## Client-side:
+1. Accept secret string
+2. Get NZBs from Dat archive
+3. Download with other tools
+
+
 Future enhancements:
+* Manage file append events (for now, only deal with file add)
 * Stream existing content from disk into archive files -> par2 -> uploader (avoids need to hold temp space)
 * Run base file upload and par2 at the same time
 * split to 20GB archives on 200GB+ archive size (20GB is rough max limit of what we can post before par2 needs more than 1 article per chunk at 768KB article size)
@@ -49,7 +58,3 @@ Future enhancements:
 
 
 
-## Client-side:
-1. Accept secret string
-2. Generate NZB
-3. Download with other tools

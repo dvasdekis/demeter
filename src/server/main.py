@@ -7,6 +7,7 @@ import sys
 import time
 import random
 import multiprocessing
+import click
 
 
 def this_func_blocks(n, print_log=False):
@@ -48,7 +49,10 @@ async def run_blocking_tasks(executor, blocking_function, num_tasks:int):
     log.info('exiting')
 
 
-def main():
+# Take a path as a click command
+@click.command()
+@click.argument('path')  # Path of file to upload to Usenet.
+def main(path):
     """
     We want to do a POC where we pull a queue of tasks and payloads form SQLite, and process them asyncronously as they arrive
     """
@@ -63,9 +67,6 @@ def main():
     # Use available cores to determine the number of simultaneous workers to run
     thread_count = cpu_count * 2
 
-    # Connect to Redis
-
-
     # Create a process pool limited by max workers (thread count) using a context manager
     with concurrent.futures.ProcessPoolExecutor(max_workers=thread_count) as executor:
         # Use the current event loop to spawn a bunch of blocking tasks with our run_blocking_tasks function
@@ -74,3 +75,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
