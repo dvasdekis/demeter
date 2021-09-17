@@ -60,7 +60,6 @@ def main(path):
     logging.basicConfig(level=logging.INFO, format='PID %(process)5s %(name)18s: %(message)s', stream=sys.stderr)
     
     # Determine CPU core count
-    
     cpu_count = multiprocessing.cpu_count()
     log = logging.getLogger('main')
     log.info(f'CPUcount={cpu_count}')
